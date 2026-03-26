@@ -1,0 +1,19 @@
+{
+  "name": "hydropredict-cubepath-hackaton",
+  "version": "1.0.0",
+  "description": "Este proyecto utiliza agentes inteligentes equipados con habilidades especializadas para la predicción de fugas de agua y la visualización de datos en tiempo real.",
+  "main": "index.js",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+  "dev:backend": "npm run watch --workspace=backend",
+  "dev:frontend": "npm run dev --workspace=frontend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
