@@ -1,0 +1,287 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const techs = ["Astro", "React", "FastAPI", "Python", "XGBoost", "Prophet", "deck.gl", "CubePath", "PostgreSQL"];
+
+const pipeline = [
+  { n: "01", title: "Ingesta de datos", desc: "Datos reales de consumo de AMAEM Alicante por sectores y barrios. Histórico de consumo doméstico y comercial." },
+  { n: "02", title: "Modelo predictivo", desc: "Isolation Forest para detección de anomalías. Prophet / XGBoost para predicción de demanda y ventana de bombeo óptima." },
+  { n: "03", title: "API & despliegue", desc: "FastAPI sirviendo los modelos. Frontend en Astro + React. Desplegado íntegramente en CubePath." },
+  { n: "04", title: "Visualización", desc: "Mapas interactivos con deck.gl sobre la red hídrica de Alicante. Gráficas de series temporales y mapas de calor." },
+];
+---
+
+<Layout title="HydroPredict - Red Hídrica Predictiva de Alicante">
+<main class="min-h-screen bg-slate-950 text-slate-200 overflow-x-hidden">
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-xl bg-slate-950/80">
+    <div class="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-white">
+          <img src="/hydropredict-logo.png" alt="HidroPredict Logo">
+        </div>
+        <div>
+          <span class="text-white font-bold">HydroPredict</span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+        <a href="#features" class="hover:text-white transition-colors">Módulos</a>
+        <a href="#impact" class="hover:text-white transition-colors">Impacto</a>
+        <a href="#tech" class="hover:text-white transition-colors">Tecnología</a>
+      </div>
+
+      <a href="/dashboard"
+         class="bg-sky-600 hover:bg-sky-700 transition-colors px-4 py-2 rounded-lg text-sm font-semibold text-white">
+        Abrir panel
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="relative min-h-screen flex items-center pt-16 bg-slate-950">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.04)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+    <div class="absolute top-0 left-0 w-96 h-96 bg-sky-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/4"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/4"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div class="max-w-4xl">
+
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-light text-white leading-[1.05] tracking-tight mb-6">
+          La red hídrica<br />
+          de Alicante,<br />
+          <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-400">
+            vista en tiempo real.
+          </span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-slate-400 max-w-xl leading-relaxed mb-10">
+          Predicción de fugas, optimización de bombeo y prevención de estrés en tuberías —
+          todo impulsado por modelos de IA sobre datos reales de consumo de AMAEM.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/dashboard"
+             class="bg-sky-600 hover:bg-sky-500 transition-colors px-7 py-4 rounded-xl text-base font-semibold text-white text-center">
+            Acceder al panel
+          </a>
+          <a href="#features"
+             class="border border-white/15 hover:border-white/30 transition-colors px-7 py-4 rounded-xl text-base font-medium text-slate-300 text-center">
+            Ver módulos ↓
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-x-10 gap-y-6 mt-14 pt-10 border-t border-white/5">
+          <div>
+            <div class="font-mono text-2xl font-bold text-white">97.7%</div>
+            <div class="text-xs text-slate-500 mt-0.5">Precisión del modelo</div>
+          </div>
+          <div>
+            <div class="font-mono text-2xl font-bold text-white">€34,587</div>
+            <div class="text-xs text-slate-500 mt-0.5">Ahorro estimado / semana</div>
+          </div>
+          <div>
+            <div class="font-mono text-2xl font-bold text-white">37,018 kg CO₂</div>
+            <div class="text-xs text-slate-500 mt-0.5">Reducción de emisiones</div>
+          </div>
+          <div>
+            <div class="font-mono text-2xl font-bold text-white">+43%</div>
+            <div class="text-xs text-slate-500 mt-0.5">Desviación detectada (Sector 41)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ── -->
+  <section id="features" class="py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-16">
+        <p class="font-mono text-xs tracking-widest text-sky-500 uppercase mb-3">Módulos del sistema</p>
+        <h2 class="text-4xl sm:text-5xl font-light text-white leading-tight">
+          Tres inteligencias.<br /><span class="font-semibold">Un solo panel.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="rounded-2xl bg-slate-900 p-8 flex flex-col gap-6 border border-white/[0.07] hover:border-sky-800/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-rose-950/60 border border-rose-900/50 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-6 h-6 text-rose-400">
+              <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-2">Predictor de Fugas</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Detección de anomalías en tiempo real sobre la red hídrica. El modelo identifica
+              desviaciones de consumo y localiza sectores con posibles fugas estructurales antes de que escalen.
+            </p>
+          </div>
+          <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Última anomalía</span>
+            <span class="font-mono text-rose-400 font-bold">41-PLAYA SAN JUAN +43%</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-slate-900 p-8 flex flex-col gap-6 border border-white/[0.07] hover:border-sky-800/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-sky-950/60 border border-sky-900/50 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-6 h-6 text-sky-400">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-2">Recomendador de Bombeo</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Planificación energética basada en modelos predictivos de demanda eólica y solar.
+              Recomienda la ventana óptima de bombeo minimizando costes y huella de carbono.
+            </p>
+          </div>
+          <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Ahorro estimado</span>
+            <span class="font-mono text-emerald-400 font-bold">€34,587 · -37,018 kg CO₂</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-slate-900 p-8 flex flex-col gap-6 border border-white/[0.07] hover:border-sky-800/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-amber-950/60 border border-amber-900/50 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-6 h-6 text-amber-400">
+              <path d="M2.5 12c0-5.247 4.253-9.5 9.5-9.5S21.5 6.753 21.5 12 17.247 21.5 12 21.5 2.5 17.247 2.5 12z"/>
+              <path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-2">Prevención de Estrés</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Anticipación de picos de demanda y mitigación de golpes de ariete. Detecta sectores
+              en riesgo de fatiga de materiales con hasta 7 días de antelación.
+            </p>
+          </div>
+          <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Próximo pico crítico</span>
+            <span class="font-mono text-amber-400 font-bold">1-BENALUA 27/03/2026</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section id="impact" class="py-28 bg-slate-900/50 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-16">
+        <p class="font-mono text-xs tracking-widest text-emerald-500 uppercase mb-3">Impacto real</p>
+        <h2 class="text-4xl sm:text-5xl font-light text-white leading-tight">
+          Números que<br /><span class="font-semibold">justifican el sistema.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-950 border border-white/5">
+          <div class="font-mono text-4xl font-bold text-white mb-1">97.7<span class="text-sky-400 text-2xl">%</span></div>
+          <div class="text-sm text-slate-400">Precisión del modelo IA de bombeo</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-950 border border-white/5">
+          <div class="font-mono text-4xl font-bold text-white mb-1">34k<span class="text-emerald-400 text-2xl">€</span></div>
+          <div class="text-sm text-slate-400">Ahorro energético mínimo / semana</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-950 border border-white/5">
+          <div class="font-mono text-4xl font-bold text-white mb-1">7<span class="text-amber-400 text-2xl"> días</span></div>
+          <div class="text-sm text-slate-400">Antelación en alertas de estrés</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-950 border border-white/5">
+          <div class="font-mono text-4xl font-bold text-white mb-1">825k<span class="text-sky-400 text-2xl"> m³</span></div>
+          <div class="text-sm text-slate-400">Volumen acumulado monitoreado</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECH ── -->
+  <section id="tech" class="py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="mb-16">
+        <p class="font-mono text-xs tracking-widest text-violet-400 uppercase mb-3">Stack técnico</p>
+        <h2 class="text-4xl sm:text-5xl font-light text-white leading-tight">
+          Construido con<br /><span class="font-semibold">herramientas reales.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+        <div class="space-y-4">
+          {pipeline.map(({ n, title, desc }) => (
+            <div class="flex items-start gap-4 p-5 rounded-xl bg-slate-900 border border-white/5">
+              <div class="font-mono text-xs text-slate-500 pt-0.5 w-6 shrink-0">{n}</div>
+              <div>
+                <div class="text-sm font-semibold text-white mb-1">{title}</div>
+                <p class="text-xs text-slate-400">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          {techs.map(t => (
+            <div class="group p-4 rounded-xl bg-slate-900 border border-white/5 text-center hover:border-sky-800/60 transition-colors">
+              <span class="font-mono text-xs text-slate-400 group-hover:text-sky-300 transition-colors">{t}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="py-28 bg-slate-950 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.04)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="w-[500px] h-[500px] rounded-full bg-sky-600/10 blur-3xl"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4 text-center">
+      <p class="font-mono text-xs tracking-widest text-sky-500 uppercase mb-4">Hackatón CubePath 2026</p>
+      <h2 class="text-4xl sm:text-5xl font-light text-white mb-6 leading-tight">
+        El agua de Alicante<br />
+        <span class="font-semibold">merece inteligencia.</span>
+      </h2>
+      <p class="text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+        AquaPredict es una plataforma de gestión hídrica inteligente construida para ayudar a
+        AMAEM a anticiparse a problemas antes de que ocurran.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/dashboard"
+           class="bg-sky-600 hover:bg-sky-500 transition-colors px-8 py-4 rounded-xl text-base font-semibold text-white">
+          Ver el panel en vivo
+        </a>
+        <a href="https://github.com" target="_blank"
+           class="border border-white/15 hover:border-white/30 transition-colors px-8 py-4 rounded-xl text-base font-medium text-slate-300">
+          Ver código →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="border-t border-white/5 bg-slate-950 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-2 text-slate-500 text-sm">
+        <span class="font-mono">AQUAPREDICT</span>
+        <span>·</span>
+        <span>AMAEM Alicante</span>
+        <span>·</span>
+        <span>Hackatón CubePath 2026</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="font-mono text-xs text-slate-500 tracking-wider">SISTEMA ACTIVO</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</Layout>
